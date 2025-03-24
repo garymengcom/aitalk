@@ -1,0 +1,6 @@
+services:
+  aitalk:
+    build: .
+    ports:
+      - "5050:5050"
+

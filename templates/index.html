@@ -103,7 +103,12 @@
         async function loadAudioDevices() {
             try {
                 // Request permission to access audio devices
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: {
+                        sampleRate: 16000,
+                        channelCount: 1,
+                        echoCancellation: true,  // Helps suppress the agent's voice being re-captured
+                        noiseSuppression: true, // Optional, depends on use case
+                    } });
                 
                 // Get the list of devices
                 const devices = await navigator.mediaDevices.enumerateDevices();
@@ -159,7 +164,12 @@
 
         async function requestMicrophonePermission() {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: {
+                        sampleRate: 16000,
+                        channelCount: 1,
+                        echoCancellation: true,  // Helps suppress the agent's voice being re-captured
+                        noiseSuppression: true, // Optional, depends on use case
+                    } });
                 statusDiv.textContent = 'Microphone: Permission granted';
                 stream.getTracks().forEach(track => track.stop()); // Stop the stream as we don't need it yet
                 return true;

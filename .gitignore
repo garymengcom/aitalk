@@ -43,3 +43,4 @@ app.db
 # Misc
 mock_data_outputs/
 misc/
+.idea/
